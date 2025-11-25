@@ -1,0 +1,19 @@
+{
+  "name": "crudempresascolaboradores",
+  "version": "1.0.0",
+  "description": "API para registrar empresas y colaboradores.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krollynk/crudEmpresasColaboradores.git"
+  },
+  "author": "Krollynk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krollynk/crudEmpresasColaboradores/issues"
+  },
+  "homepage": "https://github.com/Krollynk/crudEmpresasColaboradores#readme"
+}
