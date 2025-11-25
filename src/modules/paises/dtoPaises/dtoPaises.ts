@@ -2,10 +2,9 @@ export interface DtoPaisesGet {
     pdcPaiId: number,
     pdcPaiPais: string,
     pdcPaiSiglas: string,
-    pdcPaiFechaCreado: string,
+    pdcPaiFechaCreado: Date,
 }
-
-export interface DtoPaisesUpdate{
+export interface DtoPaisesInsert{
     pdcPaiPais: string,
     pdcPaiSiglas: string,
 }
