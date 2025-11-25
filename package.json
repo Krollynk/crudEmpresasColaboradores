@@ -4,6 +4,9 @@
   "description": "API para registrar empresas y colaboradores.",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "build": "tsc",
+    "start": "node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +18,22 @@
   "bugs": {
     "url": "https://github.com/Krollynk/crudEmpresasColaboradores/issues"
   },
-  "homepage": "https://github.com/Krollynk/crudEmpresasColaboradores#readme"
+  "homepage": "https://github.com/Krollynk/crudEmpresasColaboradores#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.15.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.27",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.10.1",
+    "ts-node-dev": "^2.0.0"
+  }
 }
