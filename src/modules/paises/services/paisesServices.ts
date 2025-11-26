@@ -1,5 +1,5 @@
 import {paisesRepository} from "../repository/paisesRepository";
-import {DtoPaisesGet, DtoPaisesInsert} from "../dtoPaises/dtoPaises"
+import {DtoPaisesGet, DtoPaisesInsert} from "../dtoPaises/dtoPaises";
 import {Not} from "typeorm";
 import {states} from "../../../utilities/states";
 
