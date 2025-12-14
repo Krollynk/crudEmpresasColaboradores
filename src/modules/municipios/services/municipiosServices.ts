@@ -17,8 +17,10 @@ class MunicipiosServices {
                 pdcMunMunicipio: true,
                 pdcDepFechaCreado: true,
                 pdcDep: {
+                    pdcDepId: true,
                     pdcDepDepartamento: true,
                     pdcPai: {
+                        pdcPaiId: true,
                         pdcPaiPais: true,
                     },
                 }
@@ -29,7 +31,7 @@ class MunicipiosServices {
         });
     }
 
-    async getMunicipios(pdcMunId:number): Promise<PdcMunicipios>{
+    async getMunicipio(pdcMunId:number): Promise<PdcMunicipios>{
         const result = await MunicipiosRepository.findOne({
             relations:{
                 pdcDep: {
@@ -65,15 +67,15 @@ class MunicipiosServices {
         return await MunicipiosRepository.save(data);
     }
 
-    async updateMunicipios(pdcMunId:number, data: DtoMunicipiosInsert):Promise<PdcMunicipios>{
-        await this.getMunicipios(pdcMunId);
+    async updateMunicipio(pdcMunId:number, data: DtoMunicipiosInsert):Promise<PdcMunicipios>{
+        await this.getMunicipio(pdcMunId);
         const result = await MunicipiosRepository.update({pdcMunId}, data);
 
-        return await this.getMunicipios(pdcMunId);
+        return await this.getMunicipio(pdcMunId);
     }
 
     async deleteMunicipio(pdcMunId: number):Promise<void>{
-        await this.getMunicipios(pdcMunId);
+        await this.getMunicipio(pdcMunId);
         const pdcDepEliminado = 1;
         await MunicipiosRepository.update({pdcMunId}, {pdcDepEliminado});
     }
