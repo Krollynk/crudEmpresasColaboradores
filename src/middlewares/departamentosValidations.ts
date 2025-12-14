@@ -1,30 +1,33 @@
 import { Request, Response, NextFunction } from "express";
 import {states} from "../utilities/states";
 
-export const paisesValidation =
+export const departamentosValidations =
     (
         req: Request,
         res: Response,
         next: NextFunction
     ) =>
     {
-        if(!req.body || Object.keys((req.body).length === 0)){
+        if(!req.body || Object.keys(req.body).length === 0){
             return next({
                 statusCode: states.ERROR,
                 message: 'El body está vacío',
             });
         }
-        let {pdcPaiPais, pdcPaiSiglas} = req.body;
-        if(!pdcPaiPais || pdcPaiPais.length === 0){
+
+        const {pdcDepDepartamento, pdcPaiId} = req.body;
+
+        if(!pdcDepDepartamento || pdcDepDepartamento.length === 0){
             return next({
                 statusCode: states.ERROR,
-                message: 'El nombre de País está vacio.'
+                message: 'No se envió nombre del departamento o está vacío',
             });
         }
-        if(!pdcPaiSiglas || pdcPaiSiglas.length === 0){
+
+        if(!pdcPaiId || pdcPaiId.length === 0){
             return next({
                 statusCode: states.ERROR,
-                message: 'Las siglas están vacías.'
+                message: 'No se envió el país o está vacío',
             });
         }
     };
