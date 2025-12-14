@@ -6,6 +6,9 @@ import {Not} from "typeorm";
 class DepartamentosServices {
     async getAllDepartamentos():Promise<PdcDepartamentos[]>{
         return await departamentosRepository.find({
+            relations:{
+              pdcPai: true,
+            },
             select: {
                 pdcDepId: true,
                 pdcDepDepartamento: true,
@@ -23,6 +26,18 @@ class DepartamentosServices {
 
     async getDepartamento(pdcDepId: number): Promise<PdcDepartamentos>{
         const result = await departamentosRepository.findOne({
+            relations:{
+                pdcPai: true,
+            },
+            select: {
+                pdcDepId: true,
+                pdcDepDepartamento: true,
+                pdcPaiId: true,
+                pdcPai: {
+                    pdcPaiPais: true,
+                    pdcPaiSiglas: true,
+                }
+            },
             where: {
                 pdcDepId: pdcDepId,
                 pdcDepEliminado: Not(1),
@@ -44,6 +59,13 @@ class DepartamentosServices {
         await this.getDepartamento(pdcDepId);
         await departamentosRepository.update({pdcDepId}, data);
         return this.getDepartamento(pdcDepId);
+    }
+
+    async deleteDepartamento(pdcDepId:number): Promise<void>{
+        await this.getDepartamento(pdcDepId);
+
+        const pdcDepEliminado = 1;
+        await departamentosRepository.update({pdcDepId}, {pdcDepEliminado});
     }
 }
 
