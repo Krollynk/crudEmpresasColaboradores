@@ -1,6 +1,6 @@
 import {PdcEmpresas} from "../../../entities/PdcEmpresas";
 import {empresasRepository} from "../repository/empresasRepository";
-import {DtoEmpresasInput} from "../dtoEmpresas/dtoEmpresas";
+import {DtoEmpresasInput} from "../dtoEmpresas/dtoEmpresasInput";
 import MunicipiosServices from "../../municipios/services/municipiosServices";
 import DepartamentosServices from "../../departamentos/services/departamentosServices";
 import PaisesServices from "../../paises/services/paisesServices";
@@ -69,7 +69,6 @@ class EmpresasServices {
     }
 
     async inserEmpresa(data: DtoEmpresasInput): Promise<PdcEmpresas>{
-
     }
 }
 

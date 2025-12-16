@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import {states} from "../utilities/states";
+import {DtoEmpresasInput} from "../modules/empresas/dtoEmpresas/dtoEmpresas";
 
 export const inputsValidations =
     (
@@ -39,6 +40,7 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/departamentos'){
+
             if(Object.keys(req.body).length > 2){
                 return next({
                     statusCode: states.ERROR,
@@ -70,7 +72,7 @@ export const inputsValidations =
                     message: 'El número de datos no coincide con los esperados'
                 });
             }
-            
+
             const {pdcMunMunicipio, pdcDepId} = req.body;
 
             if(!pdcMunMunicipio || pdcMunMunicipio.length === 0){
