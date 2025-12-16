@@ -68,7 +68,24 @@ class EmpresasServices {
         return result;
     }
 
-    async inserEmpresa(data: DtoEmpresasInput): Promise<PdcEmpresas>{
+    async insertEmpresa(data: DtoEmpresasInput): Promise<PdcEmpresas>{
+        const {pdcPaiId, pdcDepId, pdcMunId} = data;
+        await PaisesServices.getOnePais(pdcPaiId);
+        await DepartamentosServices.getDepartamento(pdcDepId);
+        await MunicipiosServices.getMunicipio(pdcMunId);
+        return await empresasRepository.save(data);
+    }
+
+    async updateEmpresa(pdcEmpId: number, data: DtoEmpresasInput): Promise<PdcEmpresas>{
+        await this.getEmpresa(pdcEmpId);
+
+        const {pdcPaiId, pdcDepId, pdcMunId} = data;
+        await PaisesServices.getOnePais(pdcPaiId);
+        await DepartamentosServices.getDepartamento(pdcDepId);
+        await MunicipiosServices.getMunicipio(pdcMunId);
+
+        await empresasRepository.update({pdcEmpId},data);
+        return await this.getEmpresa(pdcEmpId);
     }
 }
 
