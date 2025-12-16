@@ -6,7 +6,6 @@ import {states} from "../../../utilities/states";
 class EmpresasControllers {
     async getAllEmpresas(req: Request, res: Response, next: NextFunction){
         try {
-            //const data: DtoEmpresasInput = req.body;
             const result = await EmpresasServices.getAllEmpresas();
             return res.status(states.OK).json(result);
         }catch (error) {
@@ -38,8 +37,8 @@ class EmpresasControllers {
         try {
             const {pdcEmpId} = req.params;
             const data: DtoEmpresasInput = req.body;
-
-            return res.status(states.OK).json(data);
+            const result = await EmpresasServices.updateEmpresa(parseInt(pdcEmpId), data);
+            return res.status(states.OK).json(result);
         }catch (error) {
             return next(error);
         }
