@@ -6,6 +6,7 @@ import {errorHandler} from "./middlewares/errorHandler";
 import paisesRoutes from "./modules/paises/routes/paisesRoutes";
 import departamentosRoutes from "./modules/departamentos/routes/departamentosRoutes";
 import municipiosRoutes from "./modules/municipios/routes/municipiosRoutes";
+import empresasRoutes from "./modules/empresas/routes/empresasRoutes";
 
 const app = express();
 
@@ -18,7 +19,8 @@ app.get('/', (req: Request, res: Response)=> {
 });
 app.use('/paises', paisesRoutes);
 app.use('/departamentos', departamentosRoutes);
-app.use('/municipios', municipiosRoutes)
+app.use('/municipios', municipiosRoutes);
+app.use('/empresas', empresasRoutes);
 app.use(errorHandler);
 
 export default app;
