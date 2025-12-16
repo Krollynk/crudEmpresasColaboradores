@@ -27,8 +27,8 @@ class EmpresasControllers {
     async insertEmpresa(req: Request, res: Response, next: NextFunction){
         try {
             const data: DtoEmpresasInput = req.body;
-            console.log(data);
-            return res.status(states.OK).json("data"+data);
+
+            return res.status(states.OK).json(data);
         }catch (error) {
             return next(error);
         }
@@ -38,8 +38,8 @@ class EmpresasControllers {
         try {
             const {pdcEmpId} = req.params;
             const data: DtoEmpresasInput = req.body;
-            console.log(data);
-            return res.status(states.OK).json("data"+data);
+
+            return res.status(states.OK).json(data);
         }catch (error) {
             return next(error);
         }
