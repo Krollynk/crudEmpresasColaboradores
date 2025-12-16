@@ -3,6 +3,7 @@ import {PdcDepartamentos} from "../../../entities/PdcDepartamentos";
 import {DtoDepartamentosInsert} from "../dtoDepartamenos/dtoDepartamentos";
 import {states} from "../../../utilities/states";
 import {Not} from "typeorm";
+import PaisesServices from "../../paises/services/paisesServices";
 class DepartamentosServices {
     async getAllDepartamentos():Promise<PdcDepartamentos[]>{
         return await departamentosRepository.find({
@@ -52,11 +53,15 @@ class DepartamentosServices {
     }
 
     async insertDepartamento(data:DtoDepartamentosInsert): Promise<PdcDepartamentos>{
+        const {pdcPaiId} = data;
+        await PaisesServices.getOnePais(pdcPaiId);
         return await departamentosRepository.save(data);
     }
 
     async updateDepartamento(pdcDepId:number, data:DtoDepartamentosInsert): Promise<PdcDepartamentos>{
         await this.getDepartamento(pdcDepId);
+        const {pdcPaiId} = data;
+        await PaisesServices.getOnePais(pdcPaiId);
         await departamentosRepository.update({pdcDepId}, data);
         return this.getDepartamento(pdcDepId);
     }

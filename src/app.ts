@@ -2,9 +2,10 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import {Request, Response} from "express";
-import paisesRoutes from "./modules/paises/routes/paisesRoutes";
 import {errorHandler} from "./middlewares/errorHandler";
+import paisesRoutes from "./modules/paises/routes/paisesRoutes";
 import departamentosRoutes from "./modules/departamentos/routes/departamentosRoutes";
+import municipiosRoutes from "./modules/municipios/routes/municipiosRoutes";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get('/', (req: Request, res: Response)=> {
 });
 app.use('/paises', paisesRoutes);
 app.use('/departamentos', departamentosRoutes);
+app.use('/municipios', municipiosRoutes)
 app.use(errorHandler);
 
 export default app;
