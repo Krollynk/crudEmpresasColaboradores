@@ -4,7 +4,7 @@ import {DtoEmpresasInput} from "../modules/empresas/dtoEmpresas/dtoEmpresasInput
 import ValidateDto from "./validateDto";
 
 export const inputsValidations =
-    (
+    async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -92,10 +92,12 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/empresas'){
-            console.log("entra empresas");
-            const response = ValidateDto.validateDto(DtoEmpresasInput, req.body);
+            const response = await ValidateDto.validateDto(DtoEmpresasInput, req.body);
             if(response != "ok"){
-
+                return next({
+                    statusCode: states.ERROR,
+                    message: response,
+                })
             }
         }
 

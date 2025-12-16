@@ -27,8 +27,8 @@ class EmpresasControllers {
     async insertEmpresa(req: Request, res: Response, next: NextFunction){
         try {
             const data: DtoEmpresasInput = req.body;
-
-            return res.status(states.OK).json(data);
+            const result = await EmpresasServices.insertEmpresa(data);
+            return res.status(states.OK).json(result);
         }catch (error) {
             return next(error);
         }
