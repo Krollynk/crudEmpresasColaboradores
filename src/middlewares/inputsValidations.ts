@@ -16,6 +16,13 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/paises'){
+            if(Object.keys(req.body).length > 2){
+                return next({
+                    statusCode: states.ERROR,
+                    message: 'El número de datos no coincide con los esperados'
+                });
+            }
+
             let {pdcPaiPais, pdcPaiSiglas} = req.body;
             if(!pdcPaiPais || pdcPaiPais.length === 0){
                 return next({
@@ -32,6 +39,13 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/departamentos'){
+            if(Object.keys(req.body).length > 2){
+                return next({
+                    statusCode: states.ERROR,
+                    message: 'El número de datos no coincide con los esperados'
+                });
+            }
+
             const {pdcDepDepartamento, pdcPaiId} = req.body;
 
             if(!pdcDepDepartamento || pdcDepDepartamento.length === 0){
@@ -50,6 +64,13 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/municipios'){
+            if(Object.keys(req.body).length > 2){
+                return next({
+                    statusCode: states.ERROR,
+                    message: 'El número de datos no coincide con los esperados'
+                });
+            }
+            
             const {pdcMunMunicipio, pdcDepId} = req.body;
 
             if(!pdcMunMunicipio || pdcMunMunicipio.length === 0){
