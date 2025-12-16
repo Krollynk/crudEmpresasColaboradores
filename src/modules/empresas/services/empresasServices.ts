@@ -67,6 +67,10 @@ class EmpresasServices {
 
         return result;
     }
+
+    async inserEmpresa(data: DtoEmpresasInput): Promise<PdcEmpresas>{
+
+    }
 }
 
 export default new EmpresasServices();
