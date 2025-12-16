@@ -62,7 +62,7 @@ class EmpresasServices {
         });
 
         if(!result){
-            throw {statusCode: states.NOT_FOUND, message: "Departamento no encontrado"};
+            throw {statusCode: states.NOT_FOUND, message: "Empresa no encontrada"};
         }
 
         return result;
