@@ -47,7 +47,7 @@ class EmpresasControllers {
     async deleteEmpresa(req: Request, res: Response, next: NextFunction){
         try {
             const {pdcEmpId} = req.params;
-
+            await EmpresasServices.deleteEmpresa(parseInt(pdcEmpId));
             return res.status(states.OK);
         }catch (error) {
             return next(error);
