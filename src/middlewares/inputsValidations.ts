@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {states} from "../utilities/states";
 import {DtoEmpresasInput} from "../modules/empresas/dtoEmpresas/dtoEmpresasInput";
-import {validateDto} from "./validateDto";
+import ValidateDto from "./validateDto";
 
 export const inputsValidations =
     (
@@ -92,7 +92,11 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/empresas'){
-            validateDto(DtoEmpresasInput);
+            console.log("entra empresas");
+            const response = ValidateDto.validateDto(DtoEmpresasInput, req.body);
+            if(response != "ok"){
+
+            }
         }
 
         next();

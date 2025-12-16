@@ -1,38 +1,47 @@
-import {IsString, IsOptional, Min, IsNumber} from "class-validator";
+import {IsString, IsOptional, Min, IsNumber, Length} from "class-validator";
+import {Expose} from "class-transformer";
 
 export class DtoEmpresasInput {
+    @Expose()
     @IsString()
-    @Min(2)
+    @Length(2)
     pdcEmpNombreComercial: string;
 
+    @Expose()
     @IsString()
-    @Min(2)
+    @Length(2)
     pdcEmpRazonSocial: string;
 
+    @Expose()
     @IsString()
     @IsOptional()
-    @Min(2)
+    @Length(2)
     pdcEmpNit?: string;
 
+    @Expose()
     @IsString()
     @IsOptional()
-    @Min(2)
+    @Length(2)
     pdcEmpTelefono?: string;
 
+    @Expose()
     @IsString()
     @IsOptional()
-    @Min(2)
+    @Length(2)
     pdcEmpCorreo?: string;
 
+    @Expose()
     @IsNumber()
-    @Min(2)
+    @Min(1)
     pdcPaiId: number;
 
+    @Expose()
     @IsNumber()
-    @Min(2)
+    @Min(1)
     pdcDepId: number;
 
+    @Expose()
     @IsNumber()
-    @Min(2)
+    @Min(1)
     pdcMunId: number;
 }
