@@ -87,6 +87,12 @@ class EmpresasServices {
         await empresasRepository.update({pdcEmpId},data);
         return await this.getEmpresa(pdcEmpId);
     }
+
+    async deleteEmpresa(pdcEmpId: number): Promise<void>{
+        await this.getEmpresa(pdcEmpId);
+        const pdcEmpEliminado = 1;
+        await empresasRepository.update({pdcEmpId},{pdcEmpEliminado});
+    }
 }
 
 export default new EmpresasServices();
