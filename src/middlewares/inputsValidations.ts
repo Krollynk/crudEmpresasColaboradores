@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {states} from "../utilities/states";
-import {DtoEmpresasInput} from "../modules/empresas/dtoEmpresas/dtoEmpresas";
+import {DtoEmpresasInput} from "../modules/empresas/dtoEmpresas/dtoEmpresasInput";
+import {validateDto} from "./validateDto";
 
 export const inputsValidations =
     (
@@ -88,6 +89,10 @@ export const inputsValidations =
                     message: 'No se envió el Departamento o está vacío',
                 });
             }
+        }
+
+        if(req.baseUrl === '/empresas'){
+            validateDto(DtoEmpresasInput);
         }
 
         next();
