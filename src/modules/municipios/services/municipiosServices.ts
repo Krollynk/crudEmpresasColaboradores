@@ -3,6 +3,7 @@ import {MunicipiosRepository} from "../repository/municipiosRepository";
 import {Not} from "typeorm";
 import {states} from "../../../utilities/states";
 import {DtoMunicipiosInsert} from "../dtoMunicipios/dtoMunicipios";
+import DepartamentosServices from "../../departamentos/services/departamentosServices";
 
 class MunicipiosServices {
     async getAllMunicipios(): Promise<PdcMunicipios[]>{
@@ -64,13 +65,16 @@ class MunicipiosServices {
     }
 
     async inserMunicipio(data: DtoMunicipiosInsert):Promise<PdcMunicipios>{
+        const {pdcDepId} = data;
+        await DepartamentosServices.getDepartamento(pdcDepId);
         return await MunicipiosRepository.save(data);
     }
 
     async updateMunicipio(pdcMunId:number, data: DtoMunicipiosInsert):Promise<PdcMunicipios>{
         await this.getMunicipio(pdcMunId);
+        const {pdcDepId} = data;
+        await DepartamentosServices.getDepartamento(pdcDepId);
         const result = await MunicipiosRepository.update({pdcMunId}, data);
-
         return await this.getMunicipio(pdcMunId);
     }
 
