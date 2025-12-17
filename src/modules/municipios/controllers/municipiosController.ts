@@ -16,6 +16,7 @@ class MunicipiosController {
         try {
             const {pdcMunId} = req.params;
             const result = await MunicipiosServices.getMunicipio(parseInt(pdcMunId));
+            console.log(result);
             return res.status(states.OK).json(result);
         }catch (error) {
             return next(error);

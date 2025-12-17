@@ -70,9 +70,7 @@ class EmpresasServices {
 
     async insertEmpresa(data: DtoEmpresasInput): Promise<PdcEmpresas>{
         const {pdcPaiId, pdcDepId, pdcMunId} = data;
-        await PaisesServices.getOnePais(pdcPaiId);
-        await DepartamentosServices.getDepartamento(pdcDepId);
-        await MunicipiosServices.getMunicipio(pdcMunId);
+        await this.validateRegion(pdcMunId, pdcDepId, pdcPaiId);
         return await empresasRepository.save(data);
     }
 
@@ -80,9 +78,7 @@ class EmpresasServices {
         await this.getEmpresa(pdcEmpId);
 
         const {pdcPaiId, pdcDepId, pdcMunId} = data;
-        await PaisesServices.getOnePais(pdcPaiId);
-        await DepartamentosServices.getDepartamento(pdcDepId);
-        await MunicipiosServices.getMunicipio(pdcMunId);
+        await this.validateRegion(pdcMunId, pdcDepId, pdcPaiId);
 
         await empresasRepository.update({pdcEmpId},data);
         return await this.getEmpresa(pdcEmpId);
@@ -92,6 +88,19 @@ class EmpresasServices {
         await this.getEmpresa(pdcEmpId);
         const pdcEmpEliminado = 1;
         await empresasRepository.update({pdcEmpId},{pdcEmpEliminado});
+    }
+
+    async validateRegion(pdcMunId: number, pdcDepId: number, pdcPaiId: number): Promise<void>{
+        const munResult = await MunicipiosServices.getMunicipio(pdcMunId);
+        console.log(munResult);
+        if(munResult.pdcDep.pdcDepId != pdcDepId){
+            throw {statusCode: states.ERROR, message: `Departamento enviado no corresponde al Municipio. Esperado: ${munResult.pdcDep.pdcDepId} Enviado: ${pdcDepId} `};
+        }
+        const depResult = await DepartamentosServices.getDepartamento(pdcDepId);
+        if(depResult.pdcPaiId != pdcPaiId){
+            throw {statusCode: states.ERROR, message: "País enviado no corresponde al Departamento"};
+        }
+        await PaisesServices.getOnePais(pdcPaiId);
     }
 }
 
