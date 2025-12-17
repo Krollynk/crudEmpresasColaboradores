@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import {states} from "../utilities/states";
+import {DtoEmpresasInput} from "../modules/empresas/dtoEmpresas/dtoEmpresasInput";
+import ValidateDto from "./validateDto";
 
 export const inputsValidations =
-    (
+    async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -16,6 +18,13 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/paises'){
+            if(Object.keys(req.body).length > 2){
+                return next({
+                    statusCode: states.ERROR,
+                    message: 'El número de datos no coincide con los esperados'
+                });
+            }
+
             let {pdcPaiPais, pdcPaiSiglas} = req.body;
             if(!pdcPaiPais || pdcPaiPais.length === 0){
                 return next({
@@ -32,6 +41,14 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/departamentos'){
+
+            if(Object.keys(req.body).length > 2){
+                return next({
+                    statusCode: states.ERROR,
+                    message: 'El número de datos no coincide con los esperados'
+                });
+            }
+
             const {pdcDepDepartamento, pdcPaiId} = req.body;
 
             if(!pdcDepDepartamento || pdcDepDepartamento.length === 0){
@@ -50,6 +67,13 @@ export const inputsValidations =
         }
 
         if(req.baseUrl === '/municipios'){
+            if(Object.keys(req.body).length > 2){
+                return next({
+                    statusCode: states.ERROR,
+                    message: 'El número de datos no coincide con los esperados'
+                });
+            }
+
             const {pdcMunMunicipio, pdcDepId} = req.body;
 
             if(!pdcMunMunicipio || pdcMunMunicipio.length === 0){
@@ -64,6 +88,16 @@ export const inputsValidations =
                     statusCode: states.ERROR,
                     message: 'No se envió el Departamento o está vacío',
                 });
+            }
+        }
+
+        if(req.baseUrl === '/empresas'){
+            const response = await ValidateDto.validateDto(DtoEmpresasInput, req.body);
+            if(response != "ok"){
+                return next({
+                    statusCode: states.ERROR,
+                    message: response,
+                })
             }
         }
 
